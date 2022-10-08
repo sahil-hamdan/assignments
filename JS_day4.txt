@@ -1,0 +1,146 @@
+1.	Run the following code & examine the output carefully: 
+ 
+for(var i=1 ; i<10 ; i++) 
+{ 
+    setTimeout(() => { 
+        console.log(i); 
+    }, 1000) 
+} 
+ 
+Refactor the code to produce the following output after 1 second: 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+
+
+for (var i = 1; i < 10; i++) {
+  setTimeout(() => {console.log(i)}, 1000);
+}
+// tested this code And output is showing 10 for 9 times after one mins til i is less than 10 in for loop iteration
+
+// setTimeout(() => {
+//   for (let i = 1; i <= 10; i++) {
+//     console.log(i);
+//   }
+// }, 1000);
+
+
+// 2.	Write a JS function which accepts an array of 10 numbers. The function must return another array which contains only the odd numbers in the source array.
+
+function arr() {
+  let ele = [15, 20, 35, 40, 55, 60, 75, 80, 95, 100];
+  let newArr = [];
+  for (let i = 0; i < ele.length; i++) {
+    if (ele[i] % 2 != 0) newArr.push(ele[i]);
+  }
+  console.log(newArr);
+}
+
+arr();
+
+
+// 3.	Refactor the JS function created in assignment 2 so that the user can pass the filter condition also to the function. For example, only even numbers, only prime numbers, etc. The condition must NOT be passed as a string
+let ele=[1,2,3,4,5,6,7,8,9,10]
+let even=ele.filter(n=> n%2==0)   //even function
+console.log(even);
+
+let arr=[1,2,3,4,5,6,7,8,9,10,13,15,16,19,23];
+let primeNum= arr.filter(no=>{
+    for(let i=2;i<no;i++){
+        if(no%i==0)
+        return false;
+
+    }
+    return no!=1;
+});
+console.log(primeNum);
+
+
+/* 4.	Consider the following scenario: 
+There are 3 functions, namely, GetVideo(), AddIntro() and AddSummary(). Each method returns a Promise. The Promise when resolved must return a string after 3 seconds like this: 
+GetVideo()        à returns Got Video 
+AddIntro()         à returns Intro Added 
+AddSummary() à returns Summary Added 
+ 
+Invoke the GetVideo() function. The final result must be displayed as: 
+Got Video, Intro Added, Summary Added */
+function getVideo(){
+    return new Promise(function(resolve,reject){
+        setTimeout(() => {
+            if(getVideo()){
+                resolve('got video')
+            }else{
+                reject('Video not found!!!')
+            }
+            
+        }, 3000);
+    })
+}
+
+let MethodResolve = (res)=>{
+    console.log(`Message goona show after reslove: ${res}`)
+}
+let methodReject=(reject)=>{
+    console.log(`Message goona show after reject: ${reject}`)
+}
+function AddIntro(){
+    return new Promise(function(resolve,reject){
+        setTimeout(() => {
+            if(getVideo()){
+                resolve('intro Added')
+            }else{
+                reject('no intro added!!!')
+            }
+            
+        }, 3000);
+    })
+}
+function AddSummary(){
+    return new Promise(function(resolve,reject){
+        setTimeout(() => {
+            if(getVideo()){
+                resolve('Summary added')
+            }else{
+                reject('Summary not added!!')
+            }
+            
+        }, 3000);
+    })
+}
+
+getVideo().then(MethodResolve).catch(methodReject)
+AddIntro().then(MethodResolve).catch(methodReject)
+AddSummary().then(MethodResolve).catch(methodReject)
+
+// getVideo().then(methodReject).catch(MethodResolve)
+// AddIntro().then(methodReject).catch(MethodResolve)
+// AddSummary().then(methodReject).catch(MethodResolve)
+
+
+
+// 5.	Rewrite the previous assignment using async and await keywords. 
+async function fun(){
+    function getVideo(){
+        console.log('Got video');
+    }
+    function addIntro(){
+        console.log('intro added')
+    }
+    function addSummary(){
+        console.log('intro added')
+    }
+    getVideo();
+    await addIntro();
+    addSummary();
+}
+    fun();
+    console.log('the await is checking')
+
+
