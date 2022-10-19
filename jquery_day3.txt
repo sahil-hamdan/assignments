@@ -1,0 +1,152 @@
+<!-- 1.	Hit the following URL & observe the output: 
+https://jsonplaceholder.typicode.com/todos -->
+<!-- 2.	Create an HTML5 page which makes a jQuery AJAX GET request to the above-mentioned URL
+& display all titles inside a dropdown list.  -->
+<!DOCTYPE html>
+<body>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></head>
+<h1>AJAX GET request</h1>
+
+<button type="button" onclick="GetData()" >Request data</button>
+
+<select id="dropDown">
+</select>
+
+
+<script>
+  function GetData(){
+  let dropdown = $('#dropDown');
+
+dropdown.empty();
+ dropdown.append('<option selected="true" disabled>Choose title</option>');
+ dropdown.prop('selectedIndex', 0);
+
+const url = 'https://jsonplaceholder.typicode.com/todos';
+
+$.getJSON(url, function (data) {
+  $.each(data, function (key, entry) {
+    dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.title));
+  })
+});
+  };
+</script>
+
+</body>
+</html>
+--------------------------------------------------------------------------------------------------
+<!-- 3.	Create an HTML5 page which makes a jQuery AJAX GET request to the above-mentioned URL.
+    Display the title of all completed todos in a listbox and all non-completed todos as a numeric bulleted list. -->
+<!DOCTYPE html>
+<body>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></head>
+<h3>AJAX GET request to divide into two category</h3>
+
+<button type="button" onclick="GetData()" >Request data</button><br><br>
+
+<select id="dropDown">
+</select>
+<h2 id="msg"> </h2>
+<ul id="bullet">
+  </ul> 
+
+<script>
+  function GetData(){
+  let dropdown = $('#dropDown');
+  let lists=$('#bullet');
+
+dropdown.empty();
+dropdown.append('<option selected="true" disabled>the titles which are completed shown here </option>');
+// dropdown.prop('selectedIndex', 0);
+
+const url = 'https://jsonplaceholder.typicode.com/todos';
+$.getJSON(url, function (data) {
+  $.each(data, function (key, entry) {
+    if(entry.completed==true){
+           dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.title));
+    }else{
+        $("#msg").text("These are the uncompleted titles")
+        lists.append($('<li></li>').attr('value', entry.abbreviation).text(entry.title));
+    }
+  })
+});
+  };
+</script>
+
+</body>
+</html>
+-------------------------------------------------------
+<!-- 4.	Create an HTML5 page which inputs the following details: 
+ 
+a.	userid                à must be a textbox 
+b.	title                     à must be a textbox 
+c.	completed        à must be a checkbox 
+Make a jQuery POST request to the above-mentioned URL & check if the record as been added. 
+ -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <h1>AJAX Post request</h1>
+    <label for="search">Enter a user ID:</label>
+    <input type="text" id="usId" name="q" />
+    <br /><br />
+    <label for="title-search">Enter title</label>
+    <input type="text" id="txt" />
+    <br /><br />
+    <label for="U">completed:</label>
+    <input type="checkbox" id="checkbox" name="completed" value="false" />
+    <br /><br/>
+    <button onclick="getData()">Post details</button>
+    <br />
+    <h3 id="display"></h3>
+
+    <script>
+      function getData() {
+        let comp = $("#checkbox").is(":checked") ? "true" : "false";
+        let uId = document.getElementById("usId").value;
+        let ttle = document.getElementById("txt").value;
+
+        const newUser = { ID: uId, title: ttle, completed: comp };
+        //console.log("checking if object is created are not" + JSON.stringify(newUser));
+        $.ajax({
+          method: "POST",
+          url: "https://jsonplaceholder.typicode.com/todos",
+          data: newUser,
+        }).done(function (msg) {
+          document.getElementById("display").innerHTML = JSON.stringify(msg);
+        });
+      }
+    </script>
+  </body>
+</html>
+--------------------------------------------------------------------------------------
+<!-- 5.	Create an HTML5 page. Create a <div> element with the id mydiv. 
+Using the jQuery load() function, load the HTML5 page created in assignment 3 inside the <div> element.  -->
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("#mydiv").load("Q3.htm");
+          $("button").hide();
+        });
+      });
+
+    </script>
+  </head>
+
+  <body>
+    <div id="mydiv"></div>
+    <button style="margin: 40px;">Load assignment 3 internally </button>
+  </body>
+</html>

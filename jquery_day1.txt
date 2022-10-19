@@ -1,0 +1,158 @@
+<--1.Create a <div> element below the textbox. Create a button titled Show Email.
+When the button is clicked, the entered email must be displayed inside the <div> element. 
+a.	Using jQuery, attach a click event handler to the button. 
+b.	Using jQuery, get the value of the textbox. 
+c.	Using jQuery, display the email inside the <div> element. 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TextBox</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    Enter your Email id:<input type="text" id="box" /><br /><br />
+    <button type="submit" id="btn" onclick="change()">Show Email</button
+    ><br /><br />
+    <div id="div1"></div>
+    <br /><br />
+    <script>
+      $(function change() {
+        $("#btn").click(function () {
+          $("#div1").text($("#box").val());
+        });
+      });
+    </script>
+  </body>
+</html>
+----------------------------------------------------------------------------------------
+<!-- 2.	Create an HTML5 page as follows: 
+a.	Two empty <div> elements. The id of each must be div1 and div2 respectively. 
+b.	Two textboxes without ids. 
+c.	Two textareas without ids. 
+d.	A button titled Apply Style to TextBoxes. When this button is clicked, draw a red border around each textarea. 
+e.	A button titled Apply Style to first div . When this button is clicked, write some text only inside the first <div> element. 
+f.	A button titled Say Hello. When this button is clicked, each textbox and textarea must contain the text HELLO. 
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Q2.Textboxes</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <input type="text" /><br /><br />
+    <input type="text"/><br /><br />
+    <textarea></textarea><br /><br />
+    <textarea></textarea><br /><br />
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <br />
+    <button type="submit" id="btn" onclick="border()">
+      Apply style to TextBoxes
+    </button>
+    <button type="submit" id="btn1" onclick="textDiv()">
+      Apply style to First div
+    </button>
+    <button type="submit" id="btn2" onclick="insert()">Say Hello</button>
+    <script>
+      $(function insert() {
+        $("#btn2").click(function () {
+          $("input").val("HELLO");
+          $("textarea").text("HELLO");
+        });
+      });
+      $(function border() {
+        $("#btn").click(function () {
+          $("input").css("border-color", "red");
+          //   $("#id2").css("border-color", "red");
+        });
+      });
+      $(function textDiv() {
+        $("#btn1").click(function () {
+          $("#div1").html("Text been inserted in Div 1");
+        });
+      });
+    </script>
+  </body>
+</html>
+----------------------------------------------------------------------
+<!-- 3.	Create an HTML5 page which contains a hyperlink.
+ Using jQuery, write code to open Google’s home page in another window when the mouse is hovered over the link.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Q3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <br><br>
+    <a href="http://www.google.com/" style="padding: 40px;">Google.com </a>
+    <script>
+      //$('#a').hover(function(){$(this).toggleClass("underline");},function(){$(this).toggleClass("underline");});
+      var url = "http://www.google.com/";
+      $("a").mouseenter(function () {
+        window.open(url, "_blank");
+      });
+    </script>
+  </body>
+</html>
+-----------------------------------------------------------------------------------------------------
+<!--4.Create a style class and name it error, give its border color as red and background color as yellow.
+ Apply this class to a text box when the focus is moved out of it and if the entered data is more than 10.-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+      .error {
+        background-color: yellow;
+        color: black;
+        border: 2px solid red;
+        margin: 50px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="number" id="va" />
+    <br />
+    <script>
+      $(document).ready(function() {
+        $("#va").on("focusout", function() { 
+          let value = $("#va").val();
+          if(value > 10)
+          {
+            $("#va").addClass("error");
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
+------------------------------------------------------------------------------------
+<!-- 5.	Create an HTML5 page. The page contains a textbox and a button titled Login. Disable the button initially using jQuery.
+The moment something is typed in the textbox, enable the button.Disable it again if the textbox is empty.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Disable</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <br>
+    Email:<input type="text" id="msg">
+    <button type="submit" id="btn"> Login</button>
+    <script>
+      $(document).ready(function () {
+        $("#btn").prop("disabled", true);
+        $("#msg").keyup(function () {
+          $("#btn").prop("disabled", this.value == "" ? true : false);
+        });
+      });
+    </script>
+  </body>
+</html>
