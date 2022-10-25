@@ -1,0 +1,108 @@
+1. binary search
+
+const binarySearch = (array, target) => {
+    let startIndex = 0;
+    let endIndex = array.length - 1;
+    while(startIndex <= endIndex) {
+      let middleIndex = Math.floor((startIndex + endIndex) / 2);
+      if(target === array[middleIndex]) {
+        return console.log("Target was found at index " + middleIndex);
+      }
+      if(target > array[middleIndex]) {
+        console.log("Searching the right side of Array")
+        startIndex = middleIndex + 1;
+      }
+      if(target < array[middleIndex]) {
+        console.log("Searching the left side of array")
+        endIndex = middleIndex - 1;
+      }
+      else {
+        console.log("Not Found this loop iteration. Looping another iteration.")
+      }
+    }
+    
+    console.log("Target value not found in array");
+  }
+------------------------------------------------------------------------------
+2. linear search
+
+<html>
+  <head>
+    <title>linear</title>
+    <script>
+      function linear() {
+        var n = parseInt(prompt("Enter the size of an array"));
+        var a = new Array(n);
+        var t = 0;
+        for (var i = 0; i < a.length; i++) {
+          a[i] = parseInt(prompt("Enter array elements"));
+        }
+        var k = parseInt(prompt("Enter the key element to search: "));
+        for (var i = 0; i < a.length; i++) {
+          if (k == a[i]) {
+            t = 1;
+            break;
+          }
+        }
+        if (t == 1) {
+          document.writeln("Element " + a[i] + " Found at Position:" + i);
+        } else {
+          document.writeln("Element Not Found");
+        }
+      }
+    </script>
+  </head>
+  <body onLoad="linear()"></body>
+</html>
+-----------------------------------------------------------------------------------------
+3. // Bubble sort Implementation using Javascript
+
+function bblSort(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr.length - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+
+  console.log(arr);
+}
+
+var arr = [5,6,1,3,2,9];
+
+bblSort(arr);
+-----------------------------------------------------------------------
+4.//insertion sort
+const insertion_Sort = (nums) => {
+    for (let i = 1; i < nums.length; i++) {
+      let j = i - 1
+      let temp = nums[i]
+      while (j >= 0 && nums[j] > temp) {
+        nums[j + 1] = nums[j]
+        j--
+      }
+      nums[j+1] = temp
+    }
+    return nums
+  }
+  console.log(insertion_Sort([3, 0, 2, 5, -1, 4, 1]));
+------------------------------------------------------------------------------
+5. // union operation
+function union(a, b) {
+  let unionSet = new Set(a);
+  for (let i of b) {
+    unionSet.add(i);
+  }
+  return unionSet;
+}
+const setA = new Set(["messi", "kaka", "neymar"]);
+const setB = new Set(["suarez", "salah", "kante"]);
+
+const result = union(setA, setB);
+
+console.log(result);
+
+
